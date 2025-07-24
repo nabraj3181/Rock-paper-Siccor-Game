@@ -1,42 +1,89 @@
-let userscore=0;
-let compscore=0;
+let userscore = 0;
+let compscore = 0;
 
 
 
 
-const choices= document.querySelectorAll(".choice");
+const choices = document.querySelectorAll(".choice");
 
 
 
-const genCompChoice=()=>
-{
+const genCompChoice = () => {
 
-    const options=["rock","paper","siccor"];
+    const options = ["rock", "paper", "siccor"];
+    // to get a number less than 3 we need to multiply with 3 so that 0,1,2 will be obtained.
 
-    Math.random();
-    
+    // math.floor is used to remove decimal portion.
+
+    const randIx = Math.floor(Math.random() * 3);
+    return options[randIx];
 
 }
-const playgame=()=> {
+const playgame = (userchoice) => {
 
-    console.log("userchoice is",userchoice);
+    console.log("userchoice is", userchoice);
     // generate compute choice::
+    const compChoice = genCompChoice();
+    console.log("comp choice is", compChoice);
 
 
+    if (userchoice === compChoice) {
+        //draw condition::
+
+        drawGame();
+    }
+
+    else {
+        let userWin = true;
+        if (userchoice === "rock") 
+            {
+            //siccor,paper
+            userWin = compChoice === "paper" ? false : true;
+
+        }
+        else if(userchoice === "paper")
+        {//rock,siccors
+            userWin = compChoice === "scissors" ? false : true;
 
 
+          }
+
+        else
+             {
+    //rock,paper
+    userWin = compChoice === "rock" ? false : true;
 
 }
 
+showWinner(userWin);
+
+        }
+
+       }
 
 
-choices.forEach((choice)=>{
-    
+const showWinner = (userWin) => {
 
-    choice.addEventListener("click",()=>{
-const userchoice=choice.getAttribute("id");
+    if (userWin)
+        console.log("you win")
+    else {
+        console.log("comp win");
+    }
 
-        console.log(" choice was  clicked",userchoice);
+}
+
+const drawGame = () => {
+    console.log("game is draw");
+
+}
+
+choices.forEach((choice) => {
+
+
+    choice.addEventListener("click", () => {
+        const userchoice = choice.getAttribute("id");
+
+        playgame(userchoice);
 
 
     })
