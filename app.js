@@ -2,6 +2,14 @@ let userscore = 0;
 let compscore = 0;
 
 
+const msg=document.querySelector("#msg");
+const userScorepara=document.querySelector("#user-score");
+
+const compScorepara=document.querySelector("#comp-score");
+
+
+
+
 
 
 const choices = document.querySelectorAll(".choice");
@@ -55,25 +63,42 @@ const playgame = (userchoice) => {
 
 }
 
-showWinner(userWin);
+showWinner(userWin,userchoice,compChoice);
 
         }
 
        }
 
 
-const showWinner = (userWin) => {
+const showWinner = (userWin,userchoice,compchoice) => {
 
     if (userWin)
-        console.log("you win")
+    {
+       
+     userscore++;
+     console.log(userscore)
+userScorepara.innerText=userscore;
+
+    msg.innerText=`You win ! Your ${userchoice} beats ${compchoice}`
+    msg.style.backgroundColor="green";
+    }
+
     else {
-        console.log("comp win");
+        compscore++;
+        console.log(compscore);
+        compScorepara.innerText=compscore;
+                msg.innerText=` You Lose!${compchoice} beats ${userchoice}`;
+        msg.style.backgroundColor="red";
     }
 
 }
 
 const drawGame = () => {
     console.log("game is draw");
+
+    msg.innerText="Game was Draw. Play Again";
+    msg.style.backgroundColor="081b31";
+
 
 }
 
